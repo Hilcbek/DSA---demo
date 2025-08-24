@@ -1,12 +1,11 @@
 import { SinglyLinkedList } from "./code/LinkedList/Singly/code"
 
 const singlyObj = new SinglyLinkedList()
-singlyObj.append(100)
-singlyObj.append(200)
-singlyObj.append(300)
-singlyObj.appendFirst(99)
-singlyObj.appendFirst('Bereket')
-singlyObj.appendLast('Alemayehu')
-singlyObj.appendArrayOfItems(['arra1','arr2', 'arr3'])
-singlyObj.appendAnArrayItemAfterSomeElement(['arra1','arr2', 'arr3'], 300)
-console.log('current ',singlyObj.print())
+singlyObj.append(1)
+singlyObj.appendBefore(0.5, 1);
+singlyObj.appendAnArrayItemAfterSomeElement(['Bereket', 'Alemayehu'], .5)
+singlyObj.appendArrayOfItems(['I', 'am', '25', 'years', 'old'])
+singlyObj.appendFirst(0)
+singlyObj.appendLast('HiLCoE')
+singlyObj.removeElemenet(1)
+singlyObj.print();

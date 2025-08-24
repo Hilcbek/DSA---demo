@@ -31,14 +31,40 @@ export class SinglyLinkedList<T> {
     if (!this.length) {
       this.head = newNode;
       this.tail = newNode;
-    } else if (this.head && this.head.next) {
-      this.head = newNode;
-      newNode.next = this.tail;
     } else {
       newNode.next = this.head;
       this.head = newNode;
     }
     this.length += 1;
+  }
+  appendBefore(value: T, before: T): void {
+    if (!this.length) {
+      console.log('currently the list is empty');
+      return;
+    }
+
+    let newNode = new NodeClass(value);
+    let current = this.head;
+    let prev: NodeClass<T> | null = null;
+
+    if (this.head && !this.head.next && this.head.value === before) {
+      newNode.next = this.head;
+      this.head = newNode;
+      this.length += 1;
+      return;
+    }
+    while (current) {
+      if (current.value === before) {
+        if (prev) {
+          prev.next = newNode;
+          newNode.next = current;
+          this.length++;
+        }
+        return;
+      }
+      prev = current;
+      current = current.next;
+    }
   }
   appendLast(value: T): void {
     let newNode = new NodeClass(value);
@@ -52,10 +78,40 @@ export class SinglyLinkedList<T> {
     this.length += 1;
   }
 
+  appendAfter(value: T, after: T): void {
+    if (!this.length) console.log('This linked list is empty');
+
+    let newNode = new NodeClass(value);
+    if (this.head && !this.head.next && this.head.value === after) {
+      this.head.next = newNode;
+      this.tail = newNode;
+      this.length++;
+      return;
+    }
+
+    let current = this.head;
+
+    while (current) {
+      if (current.value === after) {
+        if (current.next) {
+          newNode.next = current.next;
+          current.next = newNode;
+        } else {
+          current.next = newNode;
+          this.tail = newNode;
+        }
+      }
+      this.length++;
+      current = current.next;
+    }
+  }
+
   appendArrayOfItems(values: T[]): void {
     let i = 0;
+
     while (i < values.length) {
       const newNode = new NodeClass(values[i]);
+
       if (!this.length) {
         this.head = newNode;
         this.tail = newNode;
@@ -63,6 +119,7 @@ export class SinglyLinkedList<T> {
         this.tail!.next = newNode;
         this.tail = newNode;
       }
+
       this.length += 1;
       i += 1;
     }
@@ -75,16 +132,19 @@ export class SinglyLinkedList<T> {
     let i = 0;
 
     let current = this.head;
+
     while (current) {
       if (current.value === element) {
         let nnext = current.next;
+
         while (i < values.length) {
           let newNode = new NodeClass(values[i]);
           current.next = newNode;
           current = newNode;
-
+          this.length += 1;
           i += 1;
         }
+
         current.next = nnext;
         return;
       }
@@ -92,7 +152,33 @@ export class SinglyLinkedList<T> {
     }
   }
 
-  print(): string | null {
+  removeElemenet(element: T): void {
+    if (!this.length) console.log('Currently the list empty!');
+    if (this.head?.value === element) {
+      this.head = this.head.next;
+      this.length -= 1;
+
+      if (!this.head) {
+        this.tail = null;
+      }
+      return;
+    }
+    let current = this.head;
+    while (current?.next) {
+      if (current.next.value === element) {
+        current.next = current.next.next;
+        this.length -= 1;
+
+        if (!current.next) {
+          this.tail = current;
+        }
+        return;
+      }
+      current = current?.next;
+    }
+  }
+
+  print(): void {
     let current = this.head;
     let output = '';
     while (current) {
@@ -102,6 +188,6 @@ export class SinglyLinkedList<T> {
       }
       current = current.next;
     }
-    return output;
+    console.log(output);
   }
 }
