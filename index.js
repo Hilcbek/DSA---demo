@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var singly_1 = require("./code/LinkedList/Singly/singly");
+var node1 = new singly_1.SinglyClass();
+node1.append(1);
+node1.append(2);
+node1.append(3);
+node1.append(4);
+node1.print();
+console.log('object hello');

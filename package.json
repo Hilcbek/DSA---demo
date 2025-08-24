@@ -1,0 +1,27 @@
+{
+  "name": "dsa",
+  "version": "1.0.0",
+  "description": "This is a LinkedList (Singly & Doubly), Stack, Queue, Tree & Graph",
+  "homepage": "https://github.com/Hilcbek/DSA---demo#readme",
+  "dev": "tsx watch index.ts",
+  "bugs": {
+    "url": "https://github.com/Hilcbek/DSA---demo/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Hilcbek/DSA---demo.git"
+  },
+  "license": "ISC",
+  "author": "Bereket Alemayehu Fanta",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "nodemon --watch . --ext ts --exec \"ts-node index.ts\""
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "concurrently": "^9.2.0",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  }
+}
