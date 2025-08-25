@@ -10,4 +10,8 @@ singlyObj.appendLast('HiLCoE')
 singlyObj.removeElemenet(1)
 singlyObj.removeFromLast()
 singlyObj.removeSomeNumberOfElements(5,2)
+console.log(singlyObj.find('I'));
+console.log(singlyObj.getIndex('old'))
+// singlyObj.clear()
+singlyObj.reverse()
 singlyObj.print();

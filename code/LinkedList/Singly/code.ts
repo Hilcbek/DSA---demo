@@ -28,7 +28,7 @@ export class SinglyLinkedList<T> {
   }
   appendFirst(value: T): void {
     const newNode = new NodeClass(value);
-    if (!this.length) {
+    if (this.isEmpty()) {
       this.head = newNode;
       this.tail = newNode;
     } else {
@@ -38,7 +38,7 @@ export class SinglyLinkedList<T> {
     this.length += 1;
   }
   appendBefore(value: T, before: T): void {
-    if (!this.length) {
+    if (this.isEmpty()) {
       console.log('currently the list is empty');
       return;
     }
@@ -68,7 +68,7 @@ export class SinglyLinkedList<T> {
   }
   appendLast(value: T): void {
     let newNode = new NodeClass(value);
-    if (!this.length) {
+    if (this.isEmpty()) {
       this.head = newNode;
       this.tail = newNode;
     } else if (this.tail) {
@@ -79,7 +79,7 @@ export class SinglyLinkedList<T> {
   }
 
   appendAfter(value: T, after: T): void {
-    if (!this.length) console.log('This linked list is empty');
+    if (this.isEmpty()) console.log('This linked list is empty');
 
     let newNode = new NodeClass(value);
     if (this.head && !this.head.next && this.head.value === after) {
@@ -112,7 +112,7 @@ export class SinglyLinkedList<T> {
     while (i < values.length) {
       const newNode = new NodeClass(values[i]);
 
-      if (!this.length) {
+      if (this.isEmpty()) {
         this.head = newNode;
         this.tail = newNode;
       } else {
@@ -126,7 +126,7 @@ export class SinglyLinkedList<T> {
   }
 
   appendAnArrayItemAfterSomeElement(values: T[], element: T): string | void {
-    if (!this.length) {
+    if (this.isEmpty()) {
       console.log('Currently this list null!');
     }
     let i = 0;
@@ -153,7 +153,7 @@ export class SinglyLinkedList<T> {
   }
 
   removeElemenet(element: T): void {
-    if (!this.length) {
+    if (this.isEmpty()) {
       console.log('Currently the list empty!');
       return;
     }
@@ -181,7 +181,7 @@ export class SinglyLinkedList<T> {
     }
   }
   removeFromLast(): void {
-    if (!this.length) {
+    if (this.isEmpty()) {
       console.log('Currently the list empty! nothing to remove');
       return;
     }
@@ -237,6 +237,67 @@ export class SinglyLinkedList<T> {
     }
   }
 
+  find(value: T): string | undefined {
+    if (this.isEmpty()) {
+      console.log('Currently the list is empty');
+      return;
+    }
+    let current = this.head;
+    while (current && current.value !== value) {
+      current = current.next;
+    }
+    if (current?.value === value) {
+      return `Value found for the element ${value}`;
+    } else {
+      return `The value ${value} you are looking for is not appeared in the list!`;
+    }
+  }
+
+  getIndex(value: T): number | undefined | string {
+    if (this.isEmpty()) {
+      console.log('Currently the list empty');
+      return;
+    }
+    let i = 1;
+    let current = this.head;
+    while (i < this.length && current && current.value !== value) {
+      current = current.next;
+      i++;
+    }
+    if (current?.value === value) return i;
+    else return `Item doesn't exist! for value ${value}`;
+  }
+
+  size(): number {
+    return this.length;
+  }
+  clear(): void {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
+  }
+  isEmpty(): boolean {
+    return this.length === 0;
+  }
+
+  reverse(): void {
+    if (this.isEmpty()) return;
+
+    let prev: NodeClass<T> | null = null;
+    let current = this.head;
+    let next: NodeClass<T> | null = null;
+
+    this.tail = this.head;
+
+    while (current) {
+      next = current.next;
+      current.next = prev;
+      prev = current;
+      current = next!;
+    }
+
+    this.head = prev;
+  }
   print(): void {
     let current = this.head;
     let output = '';
