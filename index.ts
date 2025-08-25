@@ -8,4 +8,6 @@ singlyObj.appendArrayOfItems(['I', 'am', '25', 'years', 'old'])
 singlyObj.appendFirst(0)
 singlyObj.appendLast('HiLCoE')
 singlyObj.removeElemenet(1)
+singlyObj.removeFromLast()
+singlyObj.removeSomeNumberOfElements(5,2)
 singlyObj.print();

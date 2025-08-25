@@ -153,7 +153,10 @@ export class SinglyLinkedList<T> {
   }
 
   removeElemenet(element: T): void {
-    if (!this.length) console.log('Currently the list empty!');
+    if (!this.length) {
+      console.log('Currently the list empty!');
+      return;
+    }
     if (this.head?.value === element) {
       this.head = this.head.next;
       this.length -= 1;
@@ -175,6 +178,62 @@ export class SinglyLinkedList<T> {
         return;
       }
       current = current?.next;
+    }
+  }
+  removeFromLast(): void {
+    if (!this.length) {
+      console.log('Currently the list empty! nothing to remove');
+      return;
+    }
+    let current = this.head;
+    while (current?.next?.next) {
+      current = current.next;
+    }
+    if (current?.next) {
+      current.next = null;
+    }
+    this.tail = current;
+    this.length -= 1;
+  }
+
+  removeSomeNumberOfElements(index: number, amount: number): void {
+    if (
+      !this.length ||
+      index >= this.length ||
+      isNaN(index) ||
+      isNaN(amount) ||
+      index < 0 ||
+      amount <= 0
+    ) {
+      console.log("Removing elements can't be done!");
+      return;
+    }
+
+    if (index === 0) {
+      while (this.head && amount > 0) {
+        this.head = this.head.next;
+        this.length--;
+        amount--;
+      }
+      if (!this.head) this.tail = null;
+      return;
+    }
+
+    let i = 0;
+    let current = this.head;
+    while (i < index - 1 && current) {
+      current = current.next;
+      i++;
+    }
+
+    while (current?.next && amount > 0) {
+      current.next = current.next.next;
+      this.length--;
+      amount--;
+    }
+
+    if (!current?.next) {
+      this.tail = current;
     }
   }
 
